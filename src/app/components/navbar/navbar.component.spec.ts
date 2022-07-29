@@ -1,3 +1,4 @@
+import { AppComponent } from 'src/app/app.component';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { NavbarComponent } from './navbar.component';
@@ -25,4 +26,11 @@ describe('NavbarComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should not search', () => {
+    component.notSearching();
+    expect(component["appComponent"].isSearching).toEqual(false);
+    expect(component["appComponent"].searchProducts).toEqual([]);
+    expect(component["appComponent"].search).toEqual('');
+  })
 });
