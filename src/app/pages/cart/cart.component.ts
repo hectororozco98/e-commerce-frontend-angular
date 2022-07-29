@@ -9,10 +9,12 @@ import { ProductService } from 'src/app/services/product.service';
   styleUrls: ['./cart.component.css'],
 })
 export class CartComponent implements OnInit {
+
   cartCount!: number;
   products: {
     product: Product;
     quantity: number;
+
   }[] = [];
   totalPrice!: number;
   cartProducts: Product[] = [];
@@ -43,6 +45,7 @@ export class CartComponent implements OnInit {
     };
     this.productService.setCart(cart);
   }
+
 
   emptyCart(): void {
     console.log('service', this.productService, this.productService.getCart());

@@ -1,3 +1,4 @@
+
 import { User } from './user';
 
 export class Address {
@@ -23,4 +24,6 @@ export class Address {
     this.zip = zip;
     this.users = users;
   }
+
+
 }

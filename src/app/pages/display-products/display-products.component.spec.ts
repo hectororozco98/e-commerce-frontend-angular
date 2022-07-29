@@ -1,19 +1,30 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DisplayProductsComponent } from './display-products.component';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+
+
+import {RouterTestingModule} from '@angular/router/testing';
+import {ProductService} from 'src/app/services/product.service';
+import {of} from 'rxjs';
+
 
 describe('DisplayProductsComponent', () => {
   let component: DisplayProductsComponent;
   let fixture: ComponentFixture<DisplayProductsComponent>;
 
   beforeEach(async () => {
+	const productServiceSpy = jasmine.createSpyObj<ProductService>(['getProducts']);
+	productServiceSpy.getProducts.and.returnValue(of());
+	
     await TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
-      declarations: [DisplayProductsComponent],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA],
-    }).compileComponents();
+
+
+      declarations: [ DisplayProductsComponent ],
+      imports: [RouterTestingModule],
+      providers: [{provide: ProductService, useValue: productServiceSpy}]
+
+    })
+    .compileComponents();
   });
 
   beforeEach(() => {

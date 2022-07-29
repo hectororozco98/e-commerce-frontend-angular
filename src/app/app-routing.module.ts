@@ -1,3 +1,4 @@
+
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DisplayProductsComponent } from './pages/display-products/display-products.component';
@@ -9,6 +10,7 @@ import { UserProfileComponent } from './pages/user-profile/user-profile.componen
 import { CreateProductComponent } from './pages/create-product/create-product.component';
 
 const routes: Routes = [
+
   { path: '', component: DisplayProductsComponent },
   { path: 'cart', component: CartComponent },
   { path: 'checkout', component: CheckoutComponent },
@@ -16,6 +18,7 @@ const routes: Routes = [
   { path: 'product-details', component: ProductDetailsComponent },
   { path: 'review-submit', component: ReviewSubmitComponent },
   { path: 'profile', component: UserProfileComponent },
+
 ];
 
 @NgModule({
