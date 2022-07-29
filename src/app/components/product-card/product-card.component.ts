@@ -19,7 +19,7 @@ export class ProductCardComponent implements OnInit {
   currentUser: User = JSON.parse(this.currentUserString);
 
   // TODO: change to admin once we retrieve the current user
-  @Input() role: String = this.currentUser.role;
+  @Input() role: string = this.currentUser.role;
   wantToDelete: boolean = false;
   wantToUpdate: boolean = false;
   cartCount!: number;
