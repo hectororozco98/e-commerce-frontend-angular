@@ -19,7 +19,7 @@ export class ProductCardComponent implements OnInit {
   currentUser: User = JSON.parse(this.currentUserString);
 
   // TODO: change to admin once we retrieve the current user
-  @Input() role: String = 'GUEST';
+  @Input() role: String = this.currentUser.role;
   wantToDelete: boolean = false;
   wantToUpdate: boolean = false;
   cartCount!: number;
@@ -173,10 +173,10 @@ export class ProductCardComponent implements OnInit {
           this.wantToUpdate = false;
           this.router.routeReuseStrategy.shouldReuseRoute = () => false;
           this.router.onSameUrlNavigation = 'reload';
-          this.router.navigate(['home']);
+          this.router.navigate(['']);
         },
         (err) => console.log(err),
-        () => this.router.navigate(['home'])
+        () => this.router.navigate([''])
       );
   }
 
@@ -190,10 +190,10 @@ export class ProductCardComponent implements OnInit {
       () => {
         this.router.routeReuseStrategy.shouldReuseRoute = () => false;
         this.router.onSameUrlNavigation = 'reload';
-        this.router.navigate(['home']);
+        this.router.navigate(['']);
       },
       (err: any) => console.log(err),
-      () => this.router.navigate(['home'])
+      () => this.router.navigate([''])
     );
   }
 }

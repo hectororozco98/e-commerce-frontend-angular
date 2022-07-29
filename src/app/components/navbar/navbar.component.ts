@@ -12,13 +12,13 @@ import { User } from '../../models/user';
   styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent implements OnInit {
-  // currentUserString: any = sessionStorage.getItem('user');
-  // currentUser: User = JSON.parse(this.currentUserString);
+   currentUserString: any = sessionStorage.getItem('user');
+   currentUser: User = JSON.parse(this.currentUserString);
 
   cartCount!: number;
   subscription!: Subscription;
 
-  @Input() role: string = 'GUEST';
+  @Input() role: string = this.currentUser.role;
 
   constructor(
     private router: Router,
