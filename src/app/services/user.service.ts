@@ -15,8 +15,8 @@ import { User } from '../models/user';
 })
 export class UserService {
   // userUrl: string = url + `/users`;
-  publicUserUrl: string = `${environment.baseUrl}/apli/public/users`;
-  privateUserUrl: string = `${environment.baseUrl}/apli/private/users`;
+  publicUserUrl: string = `${environment.baseUrl}/api/public/users`;
+  privateUserUrl: string = `${environment.baseUrl}/api/private/users`;
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
