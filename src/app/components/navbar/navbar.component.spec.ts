@@ -52,6 +52,16 @@ describe('NavbarComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+<<<<<<< HEAD
+=======
+  
+  it('should not search', () => {
+      component.notSearching();
+      expect(component["appComponent"].isSearching).toEqual(false);
+      expect(component["appComponent"].searchProducts).toEqual([]);
+      expect(component["appComponent"].search).toEqual('');
+  })
+>>>>>>> d1156715fbf148b703d91e38b2d5b40966d4d43f
 
   it('should not search', () => {
     component.notSearching();
