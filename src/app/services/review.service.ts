@@ -6,32 +6,33 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class ReviewService {
-  reviewsUrl: string = `${environment.baseUrl}/api/review`;
+  publicReviewsUrl: string = `${environment.baseUrl}/api/public/review`;
+  privateReviewsUrl: string = `${environment.baseUrl}/api/private/review`;
 
   constructor(private http: HttpClient) {}
 
   // Get a list of all reviews for all products
   getAllReviews() {
-    return this.http.get(this.reviewsUrl, { headers: environment.headers });
+    return this.http.get(this.publicReviewsUrl, { headers: environment.headers });
   }
 
   // Get a list of reviews related to a product with the given product ID
   getProductReviews(productId: number) {
-    return this.http.get(`${this.reviewsUrl}/product/${productId}`, {
+    return this.http.get(`${this.publicReviewsUrl}/product/${productId}`, {
       headers: environment.headers,
     });
   }
 
   // Get a list of reviews written by the user with the given user ID
   getUsersReviews(userId: number) {
-    return this.http.get(`${this.reviewsUrl}/user/${userId}`, {
+    return this.http.get(`${this.publicReviewsUrl}/user/${userId}`, {
       headers: environment.headers,
     });
   }
 
   // Get a specific review by its ID
   getReviewById(id: number) {
-    return this.http.get(`${this.reviewsUrl}/${id}`, {
+    return this.http.get(`${this.publicReviewsUrl}/${id}`, {
       headers: environment.headers,
     });
   }
@@ -47,14 +48,14 @@ export class ReviewService {
       title: title,
       review: review,
     };
-    return this.http.post(`${this.reviewsUrl}`, userReview, {
+    return this.http.post(`${this.privateReviewsUrl}`, userReview, {
       headers: environment.headers,
       withCredentials: environment.withCredentials,
     });
   }
 
   deleteReviewById(id: number) {
-    return this.http.delete(`${this.reviewsUrl}/${id}`, {
+    return this.http.delete(`${this.privateReviewsUrl}/${id}`, {
       headers: environment.headers,
       withCredentials: environment.withCredentials,
     });

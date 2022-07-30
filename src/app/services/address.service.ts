@@ -7,7 +7,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class AddressService {
-  addressUrl: string = `${environment.baseUrl}/api/addresses`;
+  addressUrl: string = `${environment.baseUrl}/api/private/addresses`;
 
   constructor(private http: HttpClient) {}
 

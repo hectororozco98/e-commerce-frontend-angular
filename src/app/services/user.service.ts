@@ -15,7 +15,8 @@ import { User } from '../models/user';
 })
 export class UserService {
   // userUrl: string = url + `/users`;
-  userUrl: string = `http://localhost:8080/api` + `/users`;
+  publicUserUrl: string = `${environment.baseUrl}/apli/public/users`;
+  privateUserUrl: string = `${environment.baseUrl}/apli/private/users`;
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
@@ -25,31 +26,31 @@ export class UserService {
 
   findAllUsers(): Observable<User[]> {
     return this.http
-      .get<User[]>(this.userUrl, this.httpOptions)
+      .get<User[]>(this.publicUserUrl, this.httpOptions)
       .pipe(catchError(this.handleError));
   }
 
   findUserById(id: number): Observable<User> {
     return this.http
-      .get<User>(`${this.userUrl}/${id}`, this.httpOptions)
+      .get<User>(`${this.publicUserUrl}/${id}`, this.httpOptions)
       .pipe(catchError(this.handleError));
   }
 
   findUserByUsername(username: string): Observable<User> {
     return this.http
-      .get<User>(`${this.userUrl}/${username}`, this.httpOptions)
+      .get<User>(`${this.publicUserUrl}/${username}`, this.httpOptions)
       .pipe(catchError(this.handleError));
   }
 
   registerUser(user: User): Observable<User> {
     return this.http
-      .post<User>(`${this.userUrl}`, user, this.httpOptions)
+      .post<User>(`${this.privateUserUrl}`, user, this.httpOptions)
       .pipe(catchError(this.handleError));
   }
 
   updateUser(user: User): Observable<User> {
     return this.http
-      .put<User>(`${this.userUrl}`, user, {
+      .put<User>(`${this.privateUserUrl}`, user, {
         headers: environment.headers,
         withCredentials: environment.withCredentials,
       })
@@ -58,39 +59,19 @@ export class UserService {
 
   deleteUserById(id: number): Observable<any> {
     return this.http
-      .delete<User>(`${this.userUrl}/${id}`, this.httpOptions)
+      .delete<User>(`${this.privateUserUrl}/${id}`, this.httpOptions)
       .pipe(catchError(this.handleError));
   }
 
-  // getMyPurchases(id: number): Observable<Purchase[]>{
-  //   return this.http.get<Purchase[]>(`${this.userUrl}/${id}/myPurchases`, this.httpOptions)
-  //    .pipe(catchError(this.handleError));
-  // }
-
-  // deleteFromMyPurchasesById(id: number): Observable<any>{
-  //   return this.http.delete<Purchase>(`${this.userUrl}/${id}`, this.httpOptions)
-  //    .pipe(catchError(this.handleError));
-  // }
-
-  // getMyReviews(id: number): Observable<Review[]>{
-  //   return this.http.get<Review[]>(`${this.userUrl}/${id}/myReviews`, this.httpOptions)
-  //    .pipe(catchError(this.handleError));
-  // }
-
-  // deleteFromMyReviewsById(id: number): Observable<any>{
-  //   return this.http.delete<Review>(`${this.userUrl}/${id}`, this.httpOptions)
-  //    .pipe(catchError(this.handleError));
-  // }
-
   getMyAddresses(id: number): Observable<Address[]> {
     return this.http
-      .get<Address[]>(`${this.userUrl}/${id}/myAddresses`, this.httpOptions)
+      .get<Address[]>(`${this.publicUserUrl}/${id}/myAddresses`, this.httpOptions)
       .pipe(catchError(this.handleError));
   }
 
   deleteFromMyAddressesById(id: number): Observable<any> {
     return this.http
-      .delete<Address>(`${this.userUrl}/${id}`, this.httpOptions)
+      .delete<Address>(`${this.privateUserUrl}/${id}`, this.httpOptions)
       .pipe(catchError(this.handleError));
   }
 

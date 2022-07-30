@@ -17,7 +17,9 @@ interface Cart {
   providedIn: 'root',
 })
 export class ProductService {
-  private productUrl: string = '/api/product';
+  private publicProductUrl: string = '/api/public/product';
+  private privateProductUrl: string = '/api/private/product';
+  private adminProductUrl: string = '/api/admin/product';
   private purchasesUrl: string = '/api/purchases';
 
   private _cart = new BehaviorSubject<Cart>({
@@ -39,7 +41,7 @@ export class ProductService {
   constructor(private http: HttpClient) {}
 
   public getProducts(): Observable<Product[]> {
-    return this.http.get<Product[]>(environment.baseUrl + this.productUrl, {
+    return this.http.get<Product[]>(environment.baseUrl + this.publicProductUrl, {
       headers: environment.headers,
       withCredentials: environment.withCredentials,
     });
@@ -48,7 +50,7 @@ export class ProductService {
   //maybe remove the ending headers if error?
   public getSearchProducts(searchTerm: string): Observable<Product[]> {
     return this.http.get<Product[]>(
-      environment.baseUrl + this.productUrl + `/partial-search/${searchTerm}`,
+      environment.baseUrl + this.publicProductUrl + `/partial-search/${searchTerm}`,
       {
         headers: environment.headers,
         withCredentials: environment.withCredentials,
@@ -58,7 +60,7 @@ export class ProductService {
 
   public getSingleProduct(id: number): Observable<Product> {
     return this.http.get<Product>(
-      environment.baseUrl + this.productUrl + '/' + id,
+      environment.baseUrl + this.publicProductUrl + '/' + id,
       {
         headers: environment.headers,
         withCredentials: environment.withCredentials,
@@ -81,7 +83,7 @@ export class ProductService {
       price: price,
     };
     return this.http.put<any>(
-      environment.baseUrl + this.productUrl + '/create-update',
+      environment.baseUrl + this.adminProductUrl + '/create-update',
       payload,
       {
         headers: environment.headers,
@@ -107,7 +109,7 @@ export class ProductService {
       price: price,
     };
     return this.http.put<any>(
-      environment.baseUrl + this.productUrl + '/create-update',
+      environment.baseUrl + this.adminProductUrl + '/create-update',
       payload,
       {
         headers: environment.headers,
@@ -121,7 +123,7 @@ export class ProductService {
   ): Observable<any> {
     const payload = JSON.stringify(products);
     return this.http.patch<any>(
-      environment.baseUrl + this.productUrl,
+      environment.baseUrl + this.privateProductUrl,
       payload,
       {
         headers: environment.headers,
@@ -145,7 +147,7 @@ export class ProductService {
   }
   public deleteProduct(id: number) {
     return this.http.delete<any>(
-      environment.baseUrl + this.productUrl + '/' + id,
+      environment.baseUrl + this.adminProductUrl + '/' + id,
       {
         headers: environment.headers,
         withCredentials: environment.withCredentials,

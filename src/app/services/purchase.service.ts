@@ -8,7 +8,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class PurchaseService {
-  private purchaseUrl: string = '/api/purchases';
+  private purchaseUrl: string = '/api/private/purchases';
 
   constructor(private http: HttpClient) {}
 
