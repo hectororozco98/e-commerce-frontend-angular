@@ -18,16 +18,17 @@ export const environment = {
     clientId,
     redirectUri: window.location.origin,
     errorPath,
+    audience: 'http://backend-env.eba-g9uchpeu.us-west-2.elasticbeanstalk.com/'
   },
   httpInterceptor: {
-    allowedList: [`${apiUri}/*`],
+    allowedList: [`${apiUri}/api/private/*`, `${apiUri}/api/admin/*`],
   },
   baseUrl: "http://localhost:8080",
   headers: {
     'Content-Type': 'application/json',
     'Access-Control-Allow-Origin': 'http://127.0.0.1:4200',
   },
-  withCredentials: true,
+  withCredentials: false,
 };
 
 

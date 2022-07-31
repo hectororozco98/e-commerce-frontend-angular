@@ -20,6 +20,8 @@ import { UserProfileComponent } from './pages/user-profile/user-profile.componen
 import { CreateProductComponent } from './pages/create-product/create-product.component';
 import { SearchbarComponent } from './components/searchbar/searchbar.component';
 import { AppRoutingModule } from './app-routing.module';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthHttpInterceptor } from '@auth0/auth0-angular';
 
 @NgModule({
   declarations: [
@@ -51,7 +53,13 @@ import { AppRoutingModule } from './app-routing.module';
     }),
   ],
   exports: [RouterModule],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthHttpInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
