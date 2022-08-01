@@ -13,6 +13,7 @@ import { DisplayProductsComponent } from './components/display-products/display-
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LostPasswordComponent } from './components/lost-password/lost-password.component';
+import { ChangePasswordComponent } from './components/change-password/change-password.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { LostPasswordComponent } from './components/lost-password/lost-password.
     CartComponent,
     CheckoutComponent,
     DisplayProductsComponent,
-    LostPasswordComponent
+    LostPasswordComponent,
+    ChangePasswordComponent
   ],
   imports: [
     BrowserModule,

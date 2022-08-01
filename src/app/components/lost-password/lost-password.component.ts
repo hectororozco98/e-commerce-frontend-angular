@@ -13,7 +13,7 @@ export class LostPasswordComponent implements OnInit {
   authService: AuthService;
   router: Router;
 
-  passwordResetFrom = new FormGroup({
+  passwordResetForm = new FormGroup({
     email: new FormControl('')
   })
 
@@ -26,7 +26,7 @@ export class LostPasswordComponent implements OnInit {
   }
 
   onSubmit(): void {
-    this.authService.resetPassword(this.passwordResetFrom.get('email')?.value).subscribe(
+    this.authService.resetPassword(this.passwordResetForm.get('email')?.value).subscribe(
       () => {
         this.router.navigate([''])
       },
