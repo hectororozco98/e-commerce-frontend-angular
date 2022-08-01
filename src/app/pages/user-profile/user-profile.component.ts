@@ -123,6 +123,7 @@ export class UserProfileComponent implements OnInit {
           this.addresses.push(address);
         }
         if (this.addresses.length === 0) {
+          this.addresses.push(new Address('','','','','',[this.currentUser]))
           this.isNewAddress = true;
         } else {
           this.updatedAddress.street = this.addresses[0].street;
@@ -141,12 +142,12 @@ export class UserProfileComponent implements OnInit {
 
   closePopup() {
     this.modalVisibility = 'none';
-    window.location.reload();
   }
 
   updateInfo() {
     this.modalVisibility = 'none';
     console.log("updateInfo Ran")
+
 
     this.addresses[0].street = this.updatedAddress.street
     this.addresses[0].secondary = this.updatedAddress.secondary
@@ -155,6 +156,7 @@ export class UserProfileComponent implements OnInit {
     this.addresses[0].city = this.updatedAddress.city
 
     if (this.isNewAddress) {
+<<<<<<< HEAD
       this.addressService.addAddress(this.addresses[0]).subscribe({
         next: () => {
           this.userService.findUserById(this.currentUserId).subscribe({
@@ -168,17 +170,41 @@ export class UserProfileComponent implements OnInit {
                   sessionStorage.setItem("user", JSON.stringify(this.currentUser))
                 }
               })
+=======
+      this.addressService.addAddress(this.addresses[0], this.currentUserId).subscribe({
+        next: (newAddress) => {
+          this.isNewAddress = false;
+          this.currentUser.firstName = this.updatedUserPlaceholder.firstName;
+          this.currentUser.lastName = this.updatedUserPlaceholder.lastName;
+          this.currentUser.addresses[0] = newAddress;
+          this.currentUser.reviews = this.reviews;
+          this.currentUser.purchases = this.purchases
+          this.userService.updateUser(this.currentUser, this.currentUserId).subscribe({
+            next: (updatedUser) => {
+              this.currentUser.firstName = updatedUser.firstName;
+              this.currentUser.lastName = updatedUser.lastName;
+              sessionStorage.setItem("user", JSON.stringify(this.currentUser))
+>>>>>>> 62a2f74f47f479b5599dcb4890ebf945b9c3e2d0
             }
-          });
+          })
         }
       });
     } else {
+<<<<<<< HEAD
       this.addressService.updateAddress(this.addresses[0]).subscribe({
         next:(updatedAddresses) =>{
+=======
+      this.addressService.updateAddress(this.addresses[0], this.currentUserId).subscribe({
+        next: (updatedAddresses) => {
+
+>>>>>>> 62a2f74f47f479b5599dcb4890ebf945b9c3e2d0
           this.currentUser.firstName = this.updatedUserPlaceholder.firstName;
           this.currentUser.lastName = this.updatedUserPlaceholder.lastName;
           this.currentUser.addresses[0] = updatedAddresses;
+          this.currentUser.reviews = this.reviews;
+          this.currentUser.purchases = this.purchases
 
+          console.log(this.currentUser)
           this.userService.updateUser(this.currentUser, this.currentUserId).subscribe({
             next: (updatedUser) => {
               this.currentUser.firstName = updatedUser.firstName;
@@ -190,55 +216,20 @@ export class UserProfileComponent implements OnInit {
       });
     }
     this.getAddresses(this.currentUserId);
-    // this.currentUser.purchases = this.purchases;
-    // this.currentUser.reviews = this.reviews;
-    // this.currentUser.addresses = this.addresses
-    // console.log(this.currentUser)
-
-    // this.appComponent.curUser = this.tempUser;
-    //
-    // this.currAddress.users = [this.appComponent.curUser];
-    // this.updateAddress();
-    //
-    // setTimeout(() => {
-    //   this.appComponent.curUser.addresses = this.addresses;
-    //   this.userService.updateUser(this.appComponent.curUser).subscribe(
-    //     (data) => {
-    //       this.appComponent.curUser = data;
-    //     },
-    //     (err) => console.log(err)
-    //   );
-    // }, 200);
-    //
-    // setTimeout(() => {
-    //   this.getPurchases(this.currentUserId);
-    // }, 300);
-    // setTimeout(() => {
-    //   this.getAddresses(this.currentUserId);
-    // }, 400);
   }
-
-  // updateAddress() {
-  // // TODO: something to work on
-  //   this.addresses = [];
-  //   this.addressService.updateAddress(this.currAddress).subscribe(
-  //     (data) => {
-  //       this.addresses.push(data);
-  //     },
-  //     (err) => console.log(err)
-  //   );
-  // }
 
   changeContent(content: string) {
 
-    var listItems = document.getElementsByClassName('list-group-item')
+    let listItems = document.getElementsByClassName('list-group-item')
 
-    for (var i = 0; i < listItems.length; i++) {
-
+    for (let i = 0; i < listItems.length; i++) {
       listItems.item(i)?.classList.remove('active');
     }
 
     document.getElementById(content)?.classList.add('active');
+
+    if (content === 'info') this.getAddresses(this.currentUserId);
+
     this.contentSelected = content;
   }
 
