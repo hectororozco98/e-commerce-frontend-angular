@@ -17,15 +17,9 @@ import {AuthenticationService} from "../../services/authentication.service";
   templateUrl: './product-card.component.html',
   styleUrls: ['./product-card.component.css'],
 })
-
-
-
-export class ProductCardComponent implements OnInit{
-   currentUserString: any = sessionStorage.getItem('user');
-   currentUser: User = JSON.parse(this.currentUserString);
-
-
-
+export class ProductCardComponent implements OnInit {
+  
+  @Input() role: string = 'GUEST';
   wantToDelete: boolean = false;
   wantToUpdate: boolean = false;
   cartCount!: number;
