@@ -8,9 +8,9 @@ import { ProductService } from 'src/app/services/product.service';
 import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 
 import { SearchbarComponent } from './searchbar.component';
-import { faShirt } from '@fortawesome/free-solid-svg-icons';
 
-fdescribe('SearchbarComponent', () => {
+
+describe('SearchbarComponent', () => {
   let component: SearchbarComponent;
   let fixture: ComponentFixture<SearchbarComponent>;
   let service: ProductService;
@@ -35,10 +35,9 @@ fdescribe('SearchbarComponent', () => {
 
   it('subscribe test for searching a product', fakeAsync(() => {
     let product = new Product(10, 'p1', 5, 'p1', 15, ''),
-         searchTerm = component.searchTerm,
-        spy = spyOn(service, 'getSearchProducts').and.returnValue(of([])),
-        subSpy = spyOn(service.getSearchProducts(product.toString()), 'subscribe');
-    component.ngOnInit();
+        spy = spyOn(service, 'getSearchProducts'),
+        subSpy = spyOn(service.getSearchProducts(''), 'subscribe');
+    component.onSubmit();
     tick(); 
     expect(spy).toHaveBeenCalledBefore(subSpy);
     expect(subSpy).toHaveBeenCalled();
@@ -49,7 +48,7 @@ fdescribe('SearchbarComponent', () => {
    
     let spy = spyOn(service, "getSearchProducts").and.returnValue(of([]));
 
-    component.ngOnInit();
+    component.onSubmit();
     tick();
     expect(component.searchTerm).toBeDefined();
     expect(component.search.length).toEqual(1);
