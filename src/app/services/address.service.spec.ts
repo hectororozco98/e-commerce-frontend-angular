@@ -5,10 +5,10 @@ import {HttpClientTestingModule, HttpTestingController} from '@angular/common/ht
 
 
 describe('AddressService', () => {
-  let service: AddressService,
-  httpMock: HttpTestingController;
-
-
+  let service: AddressService;
+  let httpMock: HttpTestingController;
+  
+  
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
@@ -19,6 +19,10 @@ describe('AddressService', () => {
     service = TestBed.inject(AddressService);
     httpMock = TestBed.inject(HttpTestingController);
   });
+  
+  afterEach(() => {
+	httpMock.verify();
+  })
 
   afterEach(()=>{
     httpMock.verify();
@@ -27,77 +31,77 @@ describe('AddressService', () => {
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
-
-  describe('get user addresses', ()=>{
-    it('should return expected address when called', ()=>{
-    const dummyAddresses = [
-      {
-      street: "sesame",
-      secondary: "apt 1",
-      city: "revcity",
-      state: "VA",
-      zip: "12345",
-      users: []
-    },
-    {
-      street: "placebo",
-      secondary: "apt 1",
-      city: "revcity",
-      state: "VA",
-      zip: "12345",
-      users: []
-    }
-  ]
-  service.getUserAddresses(1).subscribe(addresses =>{
-    expect(addresses.length).toBe(2);
-    expect(addresses).toEqual(dummyAddresses);
+  
+  describe('getUserAddresses', () => {
+	it('should return expected addresses when called', ()=>{
+	
+	const dummyAddresses = [
+		{
+			street: "sesame",
+			secondary: "apt 1",
+			city: "revcity",
+			state: "VA",
+			zip: "12345",
+			users: []
+		},
+		{
+			street: "placebo",
+			secondary: "apt 1",
+			city: "revcity",
+			state: "VA",
+			zip: "12345",
+			users: []
+		}
+	]
+	service.getUserAddresses(1).subscribe(addresses => {
+		expect(addresses.length).toBe(2);
+		expect(addresses).toEqual(dummyAddresses);
+	})
+	
+	const request = httpMock.expectOne(`${service.addressUrl}/user/1`);
+	expect(request.request.method).toBe('GET');
+	request.flush(dummyAddresses);
+  })	
+ })
+	
+  
+  describe('addAddress', () => {
+     it('should return expected address value when called', () => {
+	   const dummyAddress = {
+			street: "placebo",
+			secondary: "apt 1",
+			city: "revcity",
+			state: "VA",
+			zip: "12345",
+			users: []
+		};
+	service.addAddress(dummyAddress).subscribe(address => {
+		expect(address).toEqual(dummyAddress);
+	})
+	const request = httpMock.expectOne(`${service.addressUrl}`);
+	expect(request.request.method).toBe('POST');
+	request.flush(dummyAddress);
+		
+     })	
   })
-
-  const request = httpMock.expectOne(`${service.addressUrl}/user/1`);
-  expect(request.request.method).toBe('GET');
-  request.flush(dummyAddresses);
-    
+  describe('updateAddress', () => {
+     it('should return expected address value when called', () => {
+	   const dummyAddress = {
+			street: "placebo",
+			secondary: "apt 1",
+			city: "revcity",
+			state: "VA",
+			zip: "12345",
+			users: []
+		};
+	service.updateAddress(dummyAddress).subscribe(address => {
+		expect(address).toEqual(dummyAddress);
+	})
+	const request = httpMock.expectOne(`${service.addressUrl}`);
+	expect(request.request.method).toBe('PUT');
+	request.flush(dummyAddress);
+		
+     })	
   })
-  })
-  describe('add address', ()=>{
-    it('should return expected address value when called', () => {
-      const dummyAddress = {
-        street: "placebo",
-        secondary: "apt 1",
-        city: "revcity",
-        state: "VA",
-        zip: "12345",
-        users: []
-      };
-
-      service.addAddress(dummyAddress).subscribe(address => {
-        expect(address).toEqual(dummyAddress);
-      })
-      const request = httpMock.expectOne(`${service.addressUrl}`);
-      expect(request.request.method).toBe('POST');
-      request.flush(dummyAddress);
-    
-    })
-  })
-
-  describe('update address', ()=>{
-    it('should return expected address value when called', () => {
-      const dummyAddress = {
-        street: "placebo",
-        secondary: "apt 1",
-        city: "revcity",
-        state: "VA",
-        zip: "12345",
-        users: []
-      };
-
-      service.updateAddress(dummyAddress).subscribe(address => {
-        expect(address).toEqual(dummyAddress);
-      })
-      const request = httpMock.expectOne(`${service.addressUrl}`);
-      expect(request.request.method).toBe('PUT');
-      request.flush(dummyAddress);
-    
-    })
-  })
+  
 });

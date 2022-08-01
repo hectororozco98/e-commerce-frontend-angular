@@ -9,6 +9,10 @@ import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testin
 
 import { SearchbarComponent } from './searchbar.component';
 
+import {Router} from '@angular/router';
+import {RouterTestingModule} from '@angular/router/testing';
+
+
 
 describe('SearchbarComponent', () => {
   let component: SearchbarComponent;
@@ -16,17 +20,23 @@ describe('SearchbarComponent', () => {
   let service: ProductService;
 
   beforeEach(async () => {
+	const productServiceSpy =  jasmine.createSpyObj<ProductService>(['getSearchProducts']);
+	productServiceSpy.getSearchProducts.and.returnValue(of([]));
+	const routerSpy = jasmine.createSpyObj<RouterTestingModule>([''])
     await TestBed.configureTestingModule({
       declarations: [SearchbarComponent, AppComponent],
       providers: [ProductService, FormBuilder, AppComponent],
       imports: [AppRoutingModule, FormsModule, HttpClientModule]
     }).compileComponents();
 
+	
+	
     fixture = TestBed.createComponent(SearchbarComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
     service = TestBed.inject(ProductService);
   });
+  
 
   // it('should create', () => {
 	
