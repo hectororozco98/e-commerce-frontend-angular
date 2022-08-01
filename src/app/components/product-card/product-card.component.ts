@@ -9,7 +9,6 @@ import { AppComponent } from 'src/app/app.component';
 import { User } from '../../models/user';
 
 import { AuthService } from '@auth0/auth0-angular';
-import {AuthenticationService} from "../../services/authentication.service";
 
 
 @Component({
@@ -18,6 +17,9 @@ import {AuthenticationService} from "../../services/authentication.service";
   styleUrls: ['./product-card.component.css'],
 })
 export class ProductCardComponent implements OnInit {
+  currentUserString: any = sessionStorage.getItem('user');
+  currentUser: User = JSON.parse(this.currentUserString);
+
   
   @Input() role: string = 'GUEST';
   wantToDelete: boolean = false;
@@ -37,17 +39,14 @@ export class ProductCardComponent implements OnInit {
   totalPrice: number = 0;
 
   msg: string = '';
- // role: string = this.authentication.role;
 
   @Input() productInfo!: Product;
   constructor(
+    public appcomponent: AppComponent,
     private productService: ProductService,
     private router: Router,
-
     public authService: AuthService
-   ) {}
-
-
+  ) {}
   ngOnInit(): void {
     this.subscription = this.productService.getCart().subscribe((cart) => {
       this.cartCount = cart.cartCount;
@@ -214,10 +213,10 @@ export class ProductCardComponent implements OnInit {
       () => {
         this.router.routeReuseStrategy.shouldReuseRoute = () => false;
         this.router.onSameUrlNavigation = 'reload';
-        window.location.reload()
+        this.router.navigate(['home']);
       },
       (err: any) => console.log(err),
-      () => window.location.reload()
+      () => this.router.navigate(['home'])
     );
   }
 }

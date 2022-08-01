@@ -66,16 +66,6 @@ describe('CartComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-<<<<<<< HEAD
-
-  it('cart should be empty', () =>{
-    expect(component).toBeTruthy();
-    component.emptyCart();
-    expect(component.cartCount).toEqual(0);
-    expect(component.products).toEqual([]);
-    expect(component.totalPrice).toEqual(0.0);
-  })
-=======
   
   describe('ngOnInit', () => {
   it('testing productService getCart subscribe method is getting called', fakeAsync(() => {
@@ -104,5 +94,4 @@ describe('CartComponent', () => {
   })
 
   
->>>>>>> ca7d12b83d3de54caa36bb34b12b7c2b8e587727
 });
