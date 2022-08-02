@@ -64,9 +64,6 @@ export class ProductCardComponent implements OnInit {
     );
     this.msg = '';
 
-<<<<<<< HEAD
-});
-=======
     if (toBuy < 1) {
       this.msg =
         'Can not add a 0 or negitive number of items to order, please enter a higher order amount.';
@@ -156,4 +153,3 @@ deletePopUp(product: Product){
   }
 
 }
->>>>>>> 983f2fe3d639d953c0bb9f7891b8fc51875cef13

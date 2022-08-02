@@ -19,8 +19,11 @@ export class CartComponent implements OnInit {
   totalPrice!: number;
   cartProducts: Product[] = [];
 
-  constructor(private productService: ProductService, private router: Router) {}
+  constructor(private productService: ProductService, private router: Router) { }
 
+  /**
+   * Push a product to the cart, update the total price.
+   */
   ngOnInit(): void {
     this.productService.getCart().subscribe((cart) => {
       this.cartCount = cart.cartCount;
@@ -32,6 +35,10 @@ export class CartComponent implements OnInit {
     });
   }
 
+  /**
+   * Removes an item from the cart. 
+   * @param product 
+   */
   removeFromCart(product: any) {
     this.cartCount -= product.quantity;
     this.totalPrice -= product.product.price * product.quantity;
@@ -46,7 +53,13 @@ export class CartComponent implements OnInit {
     this.productService.setCart(cart);
   }
 
+<<<<<<< HEAD
 
+=======
+  /**
+   * Empty cart and reset our cart.
+   */
+>>>>>>> 3122e2c630ee2b20ac29596688bf2762fe0cac2a
   emptyCart(): void {
     console.log('service', this.productService, this.productService.getCart());
     let cart = {
