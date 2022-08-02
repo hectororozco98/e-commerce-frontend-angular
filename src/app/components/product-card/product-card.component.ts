@@ -1,16 +1,14 @@
-<<<<<<< HEAD
 import { DisplayProductsComponent } from './../../pages/display-products/display-products.component';
 import { Product } from './../../models/product';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Component, Input, OnInit } from '@angular/core';
-import {Subscription} from 'rxjs';
-import {Router} from "@angular/router";
+import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
 import { ProductService } from 'src/app/services/product.service';
 import { AppComponent } from 'src/app/app.component';
 import { User } from '../../models/user';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { AuthService } from '@auth0/auth0-angular';
-
 
 @Component({
   selector: 'app-product-card',
@@ -30,24 +28,15 @@ export class ProductCardComponent implements OnInit {
   wantToDelete: boolean = false;
   wantToUpdate: boolean = false;
   cartCount!: number;
-<<<<<<< HEAD
-  
-=======
 
   // array of products
->>>>>>> 3122e2c630ee2b20ac29596688bf2762fe0cac2a
   products: {
-
     product: Product;
     quantity: number;
-
-    
   }[] = [];
 
   subscription!: Subscription;
-  
   totalPrice: number = 0;
-
   msg: string = '';
 
   modalVisibility: string = '';
@@ -82,14 +71,10 @@ export class ProductCardComponent implements OnInit {
    */
   addToCart(product: Product): void {
     let inCart = false;
-
     let toBuy = Number(
       (<HTMLInputElement>document.getElementById(`qty${product.id}`)).value
     );
     this.msg = '';
-
-
-   
 
     if (toBuy < 1) {
       this.msg =
@@ -97,35 +82,6 @@ export class ProductCardComponent implements OnInit {
       return;
     }
 
-<<<<<<< HEAD
-
-
-
-    
-    this.products.forEach(
-      (element) => {
-        if (element.product.id == product.id) {
-          if(toBuy + element.quantity > product.quantity){
-            this.msg = "Can not order more items then currently in stock, please enter a lower order amount.";
-            inCart = true;
-            return;
-          }
-          
-          element.quantity += toBuy
-          let cart = {
-            
-            cartCount: this.cartCount + toBuy,
-            products: this.products,
-            totalPrice: this.totalPrice + toBuy
-
-          };
-          
-          this.productService.setCart(cart);
-          inCart=true;
-          return;
-        };
-
-=======
     this.products.forEach((element) => {
       if (element.product.id == product.id) {
         if (toBuy + element.quantity > product.quantity) {
@@ -145,12 +101,8 @@ export class ProductCardComponent implements OnInit {
           inCart = true;
           return;
         }
->>>>>>> 3122e2c630ee2b20ac29596688bf2762fe0cac2a
       }
-    );
-
-
-
+    });
 
     if (!inCart) {
       if (toBuy > product.quantity) {
@@ -171,14 +123,11 @@ export class ProductCardComponent implements OnInit {
       };
       this.productService.setCart(cart);
     }
+  }
 
-<<<<<<< HEAD
-   }
-=======
   /**
    * Sets Product in Session storage. Redirects user to /product-details
    */
->>>>>>> 3122e2c630ee2b20ac29596688bf2762fe0cac2a
   selectProduct(): void {
     sessionStorage.setItem('selectedProductId', this.productInfo.id.toString());
     this.router.navigate(['/product-details']);
@@ -231,6 +180,3 @@ export class ProductCardComponent implements OnInit {
   }
 
 }
-
-=======
->>>>>>> 983f2fe3d639d953c0bb9f7891b8fc51875cef13
