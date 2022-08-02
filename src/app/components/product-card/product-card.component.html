@@ -1,4 +1,3 @@
-
 <div class="card" style="width: 18rem">
   <img class="card-img-top" style="cursor: pointer;" [src]="productInfo.image" (click)="selectProduct()"
     alt="Card image cap" />
@@ -37,3 +36,23 @@
       <button class="btn btn-outline-primary btn-sm" (click)="updatePopUp(productInfo)">
         Update Item Info
       </button>
+      <button class="btn btn-outline-danger btn-sm" (click)="deletePopUp(productInfo)">
+        Delete Product
+      </button>
+
+
+    </div>
+
+  </div>
+  <div class="card-body">
+    <div class="container">
+      <div *ngIf="authService.isAuthenticated$ | async">
+        <button class="btn btn-outline-success btn-block text-center" (click)="addToCart(productInfo)">
+          Add to Cart
+        </button>
+      </div>
+    </div>
+  </div>
+
+
+</div>

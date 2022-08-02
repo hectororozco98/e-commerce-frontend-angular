@@ -110,6 +110,8 @@ export class UserProfileComponent implements OnInit {
     this.purchaseService.getUserPurchases(userId).subscribe({
       next: (purchases) => {
         for (let purchase of Object.values(purchases)) {
+          let localDate = new Date(purchase.orderPlaced);
+          purchase.orderPlaced = `${localDate.getMonth().toString()}/${localDate.getDay().toString()}/${localDate.getFullYear().toString()}`;
           this.purchases.push(purchase);
         }
       },
@@ -157,6 +159,10 @@ export class UserProfileComponent implements OnInit {
 
     if (this.isNewAddress) {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> 983f2fe3d639d953c0bb9f7891b8fc51875cef13
       this.addressService.addAddress(this.addresses[0]).subscribe({
         next: () => {
           this.userService.findUserById(this.currentUserId).subscribe({
@@ -170,6 +176,7 @@ export class UserProfileComponent implements OnInit {
                   sessionStorage.setItem("user", JSON.stringify(this.currentUser))
                 }
               })
+<<<<<<< HEAD
 =======
       this.addressService.addAddress(this.addresses[0], this.currentUserId).subscribe({
         next: (newAddress) => {
@@ -185,11 +192,15 @@ export class UserProfileComponent implements OnInit {
               this.currentUser.lastName = updatedUser.lastName;
               sessionStorage.setItem("user", JSON.stringify(this.currentUser))
 >>>>>>> 62a2f74f47f479b5599dcb4890ebf945b9c3e2d0
+=======
+
+>>>>>>> 983f2fe3d639d953c0bb9f7891b8fc51875cef13
             }
           })
         }
       });
     } else {
+<<<<<<< HEAD
 <<<<<<< HEAD
       this.addressService.updateAddress(this.addresses[0]).subscribe({
         next:(updatedAddresses) =>{
@@ -198,6 +209,12 @@ export class UserProfileComponent implements OnInit {
         next: (updatedAddresses) => {
 
 >>>>>>> 62a2f74f47f479b5599dcb4890ebf945b9c3e2d0
+=======
+
+      this.addressService.updateAddress(this.addresses[0]).subscribe({
+        next:(updatedAddresses) =>{
+
+>>>>>>> 983f2fe3d639d953c0bb9f7891b8fc51875cef13
           this.currentUser.firstName = this.updatedUserPlaceholder.firstName;
           this.currentUser.lastName = this.updatedUserPlaceholder.lastName;
           this.currentUser.addresses[0] = updatedAddresses;

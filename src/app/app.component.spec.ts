@@ -35,12 +35,22 @@ describe('AppComponent', () => {
     
   });
   
-  it(`should have as search 'help'`, ()=>{
+  it(`should have as search ''`, ()=>{
 	const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.debugElement.componentInstance;
-    expect (app.search).toEqual('help');
+    expect (app.search).toEqual('');
+   })
   
-	
+  it('should have isSearching as false', () => {
+	const fixture = TestBed.createComponent(AppComponent);
+    const app = fixture.debugElement.componentInstance;
+    expect (app.isSearching).toEqual(false);
+    
   });
-  
+  it('should have found as false', () => {
+	const fixture = TestBed.createComponent(AppComponent);
+    const app = fixture.debugElement.componentInstance;
+    expect (app.found).toEqual(false);
+    
+  });
  })

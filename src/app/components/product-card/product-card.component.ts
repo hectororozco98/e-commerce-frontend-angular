@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { DisplayProductsComponent } from './../../pages/display-products/display-products.component';
 import { Product } from './../../models/product';
 import { FormControl, FormGroup } from '@angular/forms';
@@ -176,3 +177,5 @@ deletePopUp(product: Product){
 
 }
 
+=======
+>>>>>>> 983f2fe3d639d953c0bb9f7891b8fc51875cef13
